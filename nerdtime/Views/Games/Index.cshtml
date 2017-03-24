@@ -1,0 +1,129 @@
+﻿@model IEnumerable<nerdtime.Models.Game>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Categories.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cover)
+        </th>
+        <th>
+
+            @Html.DisplayNameFor(model => model.CoverIByteData)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Img1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Img2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Img3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Video)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Synopsis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_Launch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Language)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gamers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categories.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cover)
+        </td>
+        <td>
+           
+            @{
+                var imgSrc = "";
+                if (item.CoverIByteData != null)
+                {
+                    var base64 = Convert.ToBase64String(item.CoverIByteData);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                else
+                {
+                    imgSrc = "";
+                }
+            }
+
+            <img src="@imgSrc" width="200" height="200" />
+        </td>
+        <td>
+            
+            @{
+                imgSrc = "";
+                if (item.Img1 != null)
+                {
+                    var base64 = Convert.ToBase64String(item.Img1);
+                    imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                }
+                else
+                {
+                    imgSrc = "";
+                }
+            }
+
+            <img src="@imgSrc" width="200" height="200" />
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Img2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Img3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Video)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Synopsis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Launch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Language)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gamers)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
